@@ -1,0 +1,1 @@
+Ainda sinto muita dificuldade com ponteiros e recursão, na parte de alocação de memórua sempre tive problemas com o realloc, porém o malloc e calloc sempre funcionaram.
