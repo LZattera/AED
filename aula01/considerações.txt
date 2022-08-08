@@ -1,1 +1,1 @@
-Ainda sinto muita dificuldade com ponteiros e recursão, na parte de alocação de memórua sempre tive problemas com o realloc, porém o malloc e calloc sempre funcionaram.
+Ainda sinto muita dificuldade com ponteiros e recursão, na parte de alocação de memórua sempre tive problemas com o realloc, porém o malloc e calloc sempre funcionaram. Acredito que com mais tempo consigo fazer os exercicios propostos nas listas porém com bastante dificuldade naqueles que envolvem ponteiros.
