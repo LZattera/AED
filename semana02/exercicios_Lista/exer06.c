@@ -1,6 +1,5 @@
 /*Ler nome, sexo e idade. Se sexo for feminino e idade menor que 25, imprime o nome da pessoa e a palavra “ACEITA”, caso contrario imprimir “N ´ AO ACEITA”. */
 #include<stdio.h>
-#include<stdlib.h>
 
 struct cadastro{
     char nome[20];
@@ -15,14 +14,14 @@ int main(){
     printf("Idade: ");
     scanf("%d", &Cadastro.idade);
     printf("Sexo [F/M]: ");
-    scanf("%c", &Cadastro.sexo);
+    scanf("%s", &Cadastro.sexo);
 
     /*if((Cadastro.sexo == 'F' || Cadastro.sexo == 'f') && Cadastro.idade <= 25){
         printf("%s ACEITA", Cadastro.nome);
     }else{
         printf("%s NAO ACEITA", Cadastro.nome);
     }*/
-    char aux = (char*)Cadastro.sexo;
-    ((aux == 'F' || aux == 'f') && Cadastro.idade <= 25)?printf("ACEITA"):printf("NAO ACEITA");
+
+    ((Cadastro.sexo == 'F' || Cadastro.sexo == 'f') && Cadastro.idade <= 25)?printf("%s ACEITA", Cadastro.nome):printf("%s NAO ACEITA", Cadastro.nome);
     return 0;
 }
