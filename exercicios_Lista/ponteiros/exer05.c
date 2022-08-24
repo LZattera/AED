@@ -22,6 +22,8 @@ int main(){
     printf("O maior foi %d\n", *pont);
     printf("O menor foi %d", *(pont+2));
 
+    free(pont);
+    
     return 0;
 }
 
