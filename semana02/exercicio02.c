@@ -1,40 +1,33 @@
 /*Programa que armazena todos os nomes na MESMA string
 O tamanho da string tem de aumentar diminuir de acordo com a inserção e remoção dos nomes*/
+
 #include<stdio.h>
 #include<stdlib.h>
+#include<string.h>
 
 int main(){
+
+    char stringAux[20];
+    char *listaStrings;
     int op;
-    char *listaDeNomes;
-    listaDeNomes = (char*)malloc(sizeof(char));
 
+    listaStrings = (char*)malloc(sizeof(char));//primeirra alocação do ponteiro para poder usar o relloc
     do{
-        printf("-=-=Menu-=-=\n");
-        printf("1,  Adicionar Nome \n");
-        printf("2.  Remover Nome\n");
-        printf("3.  Listar\n");
-        printf("4.  Sair\n");
+        printf("Digite seu  nome: ");
+        scanf("%s", &stringAux);
+
+        stringAux[strlen(stringAux)+1] = '>';
+
+        listaStrings = realloc(listaStrings, (sizeof(char)*strlen(stringAux)));//Alocando espaço para a string inserida
+
+        printf("Deseja continuar [0-SIM / 1-NAO]:   ");
         scanf("%d", &op);
-        switch (op)
-        {
-        case 1:
-            AdicionarNome(listaDeNomes);
-            break;
-        case 4:
-            printf("Saindo . . .\n");
-            break;
-        default:
-            printf("Opcao invalida");
-            break;
-        }
-    }while(op!=4);
-}
-char AdicionarNome(char *liNomes){
-    char aux[10];
 
-    printf("Digite o nome: ");
-    scanf("%s", &aux);
+    }while(op == 0);
+    
+    //IMPRIMINDO STRING
+    printf("%c", *listaStrings);
+    
 
-
-
+    return 0;
 }

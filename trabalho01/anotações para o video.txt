@@ -1,0 +1,15 @@
+Leticia Zattera
+Trabalho 
+git: 
+O que funciona:
+o É alocado um espaço para o nuemro de elemento dito pelo usuario
+o Teoricamente é possivel adicionar numeros aos espaços alocados porém como a função rand não funciona ele não adiciona
+o Ele lista os numeros alocados
+o A comparação é feita e ela funciona
+
+O que NÂO funciona:
+o Não é adicionado numeros aleatorios ao vetor pois não lembrava qual era a função rand para utilizar no código
+o Ele mostra lixo na impressão dos numeros adicionados pois não aicionado nada
+o Não é realocado devidamente pois a função estava escrita corretamente
+o É colocado a biblioteca math.h no codigo pois não lembrava qual era biblioteca para colocar a função rand 
+

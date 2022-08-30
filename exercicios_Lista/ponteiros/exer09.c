@@ -6,7 +6,20 @@ Imprima o endereco de cada posicao dessa matriz*/
 
 int main(){
 
-    cd
+    void *p;//ponteiro void
+    p = malloc(sizeof(float)*9);//alocando dinamicamente uma matriz de ponteiro
+
+    for(int i = 0; i< 9; i++){
+        printf("Digite um numero: ");
+        scanf("%f", (float*)&(*p));
+        p = p + sizeof(float);
+    }
+    p = p - (sizeof(float)*9);//volta para o inicio do ponteiro
+    //IMPRIMIR ELEMENTOS
+    for(int i = 0;i<9;i++){
+        printf("%.2f", (float*)*(p));
+
+    }
 
     free(p);
     return 0;
