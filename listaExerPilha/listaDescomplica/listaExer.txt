@@ -1,0 +1,8 @@
+1.  As pilhas servem para.
+
+2.  As pilhas podem ser usadas em analises de expressões matemáticas, avaliação de expressão pós-fixa, converter um número decimal em binários, funções recursivas em compiladores, mecanismo de desfazer/refazer dos editores de texto, navegação entre páginas Web, etc.
+
+3.  Para obter a ordem 2 4 3 1 a sequencia de operações será:
+    4xE -> I - N° 1 -> E - N° 4 -> E - N° 3 -> I - N° 3 -> I - N° 4 -> I - N° 2
+        VER COM O SOR
+4. FAZER
