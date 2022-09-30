@@ -119,3 +119,10 @@ int PUSH (ArvBin* raiz){
     }
     return 1;
 }
+//REMOVENDO UM NO
+int POP(ArvBin *raiz){
+    if(raiz == NULL) return 0;
+    if(*raiz == NULL) return 0;
+    struct NO* aux = raiz;
+
+}
