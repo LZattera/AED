@@ -62,7 +62,7 @@ int TotalNOS(ArvBin* raiz){
     return(altDIR+altESQ);
 }
 //PERCORRENDO A ARVORE (PRE, EM, POS)
-xs {
+void PreOrdem(ArvBin* raiz){
     if(raiz == NULL) return;
     if(*raiz != NULL){
         printf("%d\n", (*raiz)->info);
@@ -87,3 +87,35 @@ void PosOrdem(ArvBin* raiz){
     }
 }
 //INSERINDO ITENS NA ARVORE
+int PUSH (ArvBin* raiz){
+    if(raiz==NULL) return 0;
+    struct NO* novo;
+    novo = (struct NO*)malloc(sizeof(struct NO));
+    if(novo == NULL) return 0;
+    //novo->info = DADOS;
+    novo->esq = NULL;
+    novo->dir = NULL;
+    //onde inserir
+    if(*raiz == NULL)
+        *raiz = novo;
+    else{
+        struct NO *atual = *raiz;
+        struct NO *ant = NULL;
+        while(atual != NULL){
+            ant = atual;
+            if(valor == atual->info){
+                free(novo);
+                return 0;//dado ja existe
+            }
+            if(valor >atual->info)
+                atual = atual->dir;
+            else
+                atual = atual->esq;
+        }
+        if(valor > ant->info)
+            ant->dir = novo;
+        else
+            ant->esq = novo;   
+    }
+    return 1;
+}
