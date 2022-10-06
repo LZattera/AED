@@ -6,6 +6,9 @@
 4. Implementar com lista encadeada*/
 #include<stdio.h>
 #include<stdlib.h>
+#include<string.h>
+
+#define MAX 10
 
 struct agenda{
     char name[10];

@@ -116,6 +116,7 @@ int PUSH(ArvAVL *raiz, int valor){
 }
 
 int POP(ArvAVL* raiz, int valor){
+    //Procura o no a ser removido
     if(*raiz == NULL){
         printf("Valor não existe\n");
         return 0;
