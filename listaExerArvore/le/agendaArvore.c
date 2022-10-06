@@ -20,7 +20,7 @@ int main(){
     int op;
 
     do{
-        printf("-=-=AGENDA ARVORE-=-=");
+        printf("-=-=AGENDA ARVORE-=-=\n");
         printf("1. INSERIR   \n");
         printf("2. REMOVER   \n");
         printf("3. BUSCAR   \n");
@@ -76,11 +76,11 @@ void LiberaNO(struct NO* no){
 struct NO* InsertData(){
     struct NO* aux;
     printf("Name: ");
-    scanf("%s", &aux->name);
+    scanf("%s", (*aux).name);//problema no scanf
     printf("Age: ");
-    scanf("%d", &aux->age);
+    scanf("%d", &(*aux).age);
     printf("Telefone: ");
-    scanf("%d", &aux->tel);
+    scanf("%d", &(*aux).tel);
 
     return aux;
 }
@@ -115,4 +115,16 @@ int POPAge(ArvBin* raiz){
             ant = ant->esq;
     }
     return 1;
+}
+void PrintTree(ArvBin* raiz){
+    if(raiz == NULL) return;//se foi alocada
+    if(*raiz == NULL) return;//se arv existe
+    struct NO* atual= *raiz;
+    while(atual != NULL){
+        PrintTree(&((*raiz)->esq));
+        PrintTree(&((*raiz)->dir));
+        printf("Name: %d\n", (*atual).name);
+        printf("Age: %d\n", (*atual).age);
+        printf("Telephone: %d\n", (*atual).tel);
+    }
 }

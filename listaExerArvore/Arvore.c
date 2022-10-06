@@ -1,9 +1,18 @@
+/*TESTAR
+1- ISNERÇÃO
+2- REMOÇÃO
+3- CONSULTA
+4- INSERÇÃO POR NOME
+5- REMOÇÃO POR NOME
+6- CONSULTA POR NOME
+7- IMPRIMIR PRE/  / EM/  / POS/  /*/
 #include<stdio.h>
 #include<stdlib.h>
 #include"Arvore.h"
 
 struct NO{
-    int info;
+    char name[10];
+    int ID;
     struct NO *esq;
     struct NO *dir; 
 };
@@ -15,7 +24,36 @@ int main(){
 
     do{
         printf("-=-=Menu-=-=\n");
-        printf("\n");
+        printf("1.  Inserir\n");
+        printf("2.  Remover\n");
+        printf("3.  Buscar\n");
+        printf("4.  Listar\n");
+        printf("0.  SAIR\n");
+        scanf("%d", &op);
+        switch(op){
+            case 1:
+                PUSH(raiz);
+                break;
+            case 4:
+                printf("1.  Listar PRE Ordem\n");
+                printf("2.  Listar EM Ordem\n");
+                printf("3.  Listar POS Ordem\n");
+                scanf("%d", &op);
+                switch(op){
+                    case 1:
+                        PreOrdem(raiz);
+                        break;
+                    case 2:
+                        EmOrdem(raiz);
+                        break;
+                    case 3:
+                        PosOrdem(raiz);
+                        break;
+                    default:
+                        printf("Numero invalido\n");
+                        break;
+                }
+        }
     }while(op != 0);
     LiberaArvore(raiz);
 }
@@ -65,7 +103,7 @@ int TotalNOS(ArvBin* raiz){
 void PreOrdem(ArvBin* raiz){
     if(raiz == NULL) return;
     if(*raiz != NULL){
-        printf("%d\n", (*raiz)->info);
+        printf("%d\n", (*raiz)->ID);
         PreOrdem(&((*raiz)->esq));
         PreOrdem(&((*raiz)->dir));
     }
@@ -74,7 +112,7 @@ void EmOrdem(ArvBin* raiz){
     if(raiz == NULL) return;
     if(*raiz != NULL){
         EmOrdem(&((*raiz)->esq));
-        printf("%d\n",(*raiz)->info);
+        printf("%d\n",(*raiz)->ID);
         EmOrdem(&((*raiz)->dir));
     }
 }
@@ -83,7 +121,7 @@ void PosOrdem(ArvBin* raiz){
     if(*raiz != NULL){
         PosOrdem(&((*raiz)->esq));
         PosOrdem(&((*raiz)->dir));
-        printf("%d\n", (*raiz)->info);
+        printf("%d\n", (*raiz)->ID);
     }
 }
 //INSERINDO ITENS NA ARVORE
@@ -92,7 +130,10 @@ int PUSH (ArvBin* raiz){
     struct NO* novo;
     novo = (struct NO*)malloc(sizeof(struct NO));
     if(novo == NULL) return 0;
-    //novo->info = DADOS;
+
+    struct NO* aux = InsertData();
+    novo->ID = aux->ID;
+    *novo->name = aux->name;
     novo->esq = NULL;
     novo->dir = NULL;
     //onde inserir
@@ -103,16 +144,16 @@ int PUSH (ArvBin* raiz){
         struct NO *ant = NULL;
         while(atual != NULL){
             ant = atual;
-            if(valor == atual->info){
+            if(aux->ID == atual->ID){
                 free(novo);
                 return 0;//dado ja existe
             }
-            if(valor >atual->info)
+            if(aux->ID >atual->ID)
                 atual = atual->dir;
             else
                 atual = atual->esq;
         }
-        if(valor > ant->info)
+        if(aux->ID > ant->ID)
             ant->dir = novo;
         else
             ant->esq = novo;   
@@ -120,9 +161,73 @@ int PUSH (ArvBin* raiz){
     return 1;
 }
 //REMOVENDO UM NO
-int POP(ArvBin *raiz){
+int POP(ArvBin *raiz, int valor){
     if(raiz == NULL) return 0;
-    if(*raiz == NULL) return 0;
-    struct NO* aux = raiz;
-
+    struct NO* atual = *raiz;
+    struct NO* ant = NULL;
+    while(atual != NULL){
+        if(valor == atual->ID){
+            if(atual == *raiz)
+                *raiz = RemoveAtual(atual);
+            else{
+                if(ant->dir == atual)
+                    ant->dir = RemoveAtual(atual);
+                else
+                    ant->esq = RemoveAtual(atual);
+            }
+            return 1;
+        }
+    }
+    ant = atual;
+    if(valor > atual->ID)
+        atual = atual->dir;
+    else
+        atual = atual->dir;
 }
+struct NO* RemoveAtual(struct NO* atual){
+    struct NO *no1, *no2;
+    if(atual->esq == NULL){
+        //Sem filho a esquerda, aponta para o filho da direita(Trata no folha e no com 1 filho)
+        no2 = atual->dir;
+        free(atual);
+        return no2;
+    }
+    //Procura filho mais a direita na subatv da esquerda
+    no1 = atual;
+    no2 = atual->esq;
+    while(no2->dir != NULL){
+        no1 = no2;
+        no2 = no2->dir;
+    }
+    //Copia o filho mais a direita na subarv esquerda para olugar do no removido
+    if (no1 != atual){
+        no1->dir= no2->esq;
+        no2->esq = atual->esq;
+    }
+    no2->dir = atual->dir;
+    free(atual);
+    return no2;
+    
+}
+//CONSULTA NA ARVORE
+int Consulta(ArvBin* raiz, int valor){
+    if(raiz == NULL) return 0;
+    struct NO* atual = *raiz;
+    while(atual != NULL){
+        if(valor == atual->ID)
+            return 1;
+        if(valor > atual->ID)
+            atual = atual->dir;
+        else
+            atual = atual->esq;
+    }
+    return 0;
+}
+struct NO* InsertData(){
+    struct NO* aux;
+    printf("ID: ");
+    scanf("%d", &aux->ID);
+    printf("Name: ");
+    scanf("%s", aux->name);
+    return aux;
+} 
