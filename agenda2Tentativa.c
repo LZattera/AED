@@ -15,7 +15,7 @@
 
 #define PROXPESSOA ((sizeof(char)*10)+(sizeof(int)*2)+sizeof(void**))
 //NOME | IDADE + TELEFONE | PPROX
-#define ANTPESSOA ((sizeof(char*10)+sizeof(int)*2))
+#define ANTPESSOA (sizeof(char*10)+sizeof(int)*2)
 
 int main(){
     void *pAux = NULL;
@@ -28,14 +28,57 @@ int main(){
     while(1){
         printf("=-=MENU=-=\n");
         printf("1.  INSERIR\n");
+        printf("2.  LISTAR\n");
         scanf("%d", (int*)pBuffer);
         switch(*(int*)pBuffer){
             case 1:
+                InsertPerson(pBuffer, pAux);
                 printf("Funcionou");
+                break;
+            case 2:
                 break;
         }
     }
     free(pBuffer);
     free(pAux);
     return 0;
+}
+
+void InsertPerson(void *pBuffer, void *pAux){
+    void *personInfo = NULL;
+    personInfo = malloc(NOME + IDADE + TELEFONE + P_AUX + P_AUX);
+
+    int *pCont = *(int*)pAux;
+    void *personInfoAux = NULL;
+
+    if(personInfo != NULL){
+        printf("Digite as iformacoes: \n");
+        printf("Nome> ");
+        scanf("%s", (char*)personInfo);
+        getchar();
+        printf("Idade> ");
+        scanf("%d", &*(int*)(personInfo + NOME));
+        getchar();
+        printf("Telefone> ");
+        scanf("%d", &*(int*)(personInfo + NOME + IDADE));
+
+        *(void **)(personInfo + PROXPESSOA) = NULL;
+        *(void **)(personInfo + ANTPESSOA) = NULL;
+
+        if(*pCont == 0){
+            *(void **)(pAux + LASTPERSON) = personInfo;
+            *(void**)(pAux + FIRSTPERSON) = personInfo;
+            *pCont += 1;
+
+            return;
+        }
+
+        pBuffer = *(void **)(pAux + FIRSTPERSON);
+
+        while(pBuffer != NULL){
+            if(strcmp((char*)personInfo, (char*)pBuffer) < 0){
+                
+            }
+        }
+    }
 }
