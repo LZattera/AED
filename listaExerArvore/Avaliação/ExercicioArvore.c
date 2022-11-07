@@ -76,10 +76,10 @@ void IsAvl(AvrBin* root){
 
     treeBF = heigthLeft - heigthRigth;
 
-    if(treeBF >= -1 || treeBF <= 1)
+    if(treeBF <= -1 || treeBF >= 1)
         printf("Os valores inseridos formam uma arvore AVL\n");
     else
-        printf("Os valores inseridos NÃO formam uma arvore AVL\n");
+        printf("Os valores inseridos NAO formam uma arvore AVL\n");
 }
 int NodeHeigth(AvrBin *root){
     int left, rigth;
@@ -116,3 +116,6 @@ int main(){
     FreeTree(root);
     return 0;
 }
+/*dr Memory 
+ debugar o código
+*/
