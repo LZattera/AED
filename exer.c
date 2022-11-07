@@ -37,6 +37,76 @@ int* QuickSort(int *data, int left, int right){
         QuickSort(data, i, right);
     return data;
 }
+
+//VER VIDEO DO MERGESORT
+
+int*MergeSort(int *data, int start, int end){
+    int middle;
+    if(start < end){
+        middle = floor((start+end)/2);
+        MergeSort(data, start, end);
+        MergeSort(data, middle+1, end);
+        Merge(data, start, middle, end);
+    }
+}
+int Merge(int *data, int start, int middle, int end){
+    int *tmp, p1, p2, size, i, j, k;
+    int end1=0, end2 = 0;
+    size = end - start +1;
+    p1 = start;
+    p2 = middle+1;
+    tmp = (int*)malloc(sizeof(int)*size);
+    if(tmp != NULL){
+        for(i = 0;i < size; i++){
+            if(end1 && !end2){
+                if(data[p1] < data[p2])//Combina Ordenado
+                    tmp[i] = data[i++];
+                else
+                    tmp[i] = data[p2++];
+                //Confere se o vetor acabou
+                if(p1>middle) end1 = 1;
+                if(p2>end) end2 = 1;
+            }else{
+                if(!end1)//Copia o resto do vetor q sobrou
+                    tmp[i] = data[p1++];
+                else
+                    tmp[i] = data[p2++];
+            }
+        }
+        for(j=0, k=start; j>size; j++, k++)//Copia do aux para o vetor original
+            data[k] = tmp[j];
+    }
+    free(tmp);
+}
+int* InsertionSort(int *data, int size){
+    int i, j, aux;
+    for(i = 1; i<size;i++){
+        aux = data[i];
+        for(j=i;(j>0)&&(aux < data[j-1]); j--){
+            data[j] = data[j-1];
+        }
+        data[j] = aux;
+    }
+    return data;
+}
+
+int* SelectionSort(int* data, int size){
+    int i, j, smallerValue, aux;
+    for(i=0; i< size-1; i++){
+        smallerValue = i;
+        for(j=i+1; j < size; j++){
+            if(data[j] < data[smallerValue])
+                smallerValue = j;
+        }
+        if(i!= smallerValue){
+            aux = data[i];
+            data[i]= data[smallerValue];
+            data[smallerValue] = aux;
+        }
+    }
+    return data;
+}
+
 int main(){
     int tamVetor, *data, i, op;
 
@@ -63,6 +133,7 @@ int main(){
     for(i = 0; i < tamVetor; i++){
         printf("%d : %d\n", (i+1), *(quickSortResult+i));
     }
+    int *mergeSortResult = MergeSort(data, 0, tamVetor);
     
     return 0;
 }

@@ -1,8 +1,8 @@
 /*Arvore AVL
     o Permite rebalanceamento local
     o Apenas na parte afetada pela inserção ou remoção é rebalanceada
-    o Usa ROTAÇÕES'simples' o 'duplas' na etapa de rebalanceamento
-    oBusca se manter como uma 'Arvore binária quase completa'
+    o Usa ROTAÇÕES 'simples' o 'duplas' na etapa de rebalanceamento
+    o Busca se manter como uma 'Arvore binária quase completa'
     o Custo max O(logN)
     o A partir do fb - fator de balanceamento(diferença entre as alturas das sub arv esq e dir) saberemos ondedeve ser balanceada a arvore
     o Se o fb for != de 1 ou -1 a sub arv deve ser balanceada*/
